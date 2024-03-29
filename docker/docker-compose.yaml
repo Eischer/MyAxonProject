@@ -1,0 +1,9 @@
+services:
+  axon_server:
+      image: axoniq/axonserver
+      container_name: my_axon_server
+      ports:
+        - 8024:8024
+        - 8124:8124
+      volumes:
+        - .\mountAxonConfig\axonserver.properties:/axonserver/axonserver.properties
