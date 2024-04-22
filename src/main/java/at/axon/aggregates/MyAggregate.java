@@ -1,7 +1,9 @@
 package at.axon.aggregates;
 
 import at.axon.command.CreateAggregateCommand;
+import at.axon.command.EditAggregateCommand;
 import at.axon.events.AggregateCreatedEvent;
+import at.axon.events.AggregateEditedEvent;
 import org.axonframework.commandhandling.CommandHandler;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.modelling.command.AggregateCreationPolicy;
@@ -33,10 +35,21 @@ public class MyAggregate {
         logger.info("Enter CommandHandler. AggregateId is: " + aggregateId);
         apply(new AggregateCreatedEvent(createAggregateCommand.getId()));
     }
+    
+    @CommandHandler
+    public void edit(EditAggregateCommand editAggregateCommand) {
+        apply(new AggregateEditedEvent(editAggregateCommand.getId(), editAggregateCommand.getNameToSet()));
+    }
 
     @EventSourcingHandler
     public void on (AggregateCreatedEvent event) {
         logger.info("Enter EventsourcingHandler. The event-id: " + event.getId());
         this.aggregateId = event.getId();
+    }
+    
+    @EventSourcingHandler
+    public void onEdit(AggregateEditedEvent aggregateEditedEvent) {
+        this.aggregateId = aggregateEditedEvent.getId();
+        this.name = aggregateEditedEvent.getName();
     }
 }

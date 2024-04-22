@@ -18,10 +18,19 @@ public class ExampleResource {
 
     @POST
     @Produces(MediaType.TEXT_PLAIN)
-    @Path("{id}")
+    @Path("create/{id}")
     public Response createAggregate(@PathParam("id") String id, @Context UriInfo uriInfo) {
-        logger.info(MessageFormat.format("Hello. ID is: {}", id));
+        logger.info(MessageFormat.format("Create Aggregate with AggregateIdentifier: {0}", id));
         exampleService.createNewAggregate(id);
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(id).build()).build();
+    }
+
+    @POST
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("edit/{id}")
+    public Response editAggregate(@PathParam("id") String id, @Context UriInfo uriInfo) {
+        logger.info(MessageFormat.format("Edit Aggregate with AggregateIdentifier: {0}", id));
+        exampleService.editNewAggregate(id, "staticName");
         return Response.created(uriInfo.getAbsolutePathBuilder().path(id).build()).build();
     }
 

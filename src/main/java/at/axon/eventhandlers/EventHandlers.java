@@ -1,5 +1,6 @@
-package at.axon.events;
+package at.axon.eventhandlers;
 
+import at.axon.events.AggregateCreatedEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

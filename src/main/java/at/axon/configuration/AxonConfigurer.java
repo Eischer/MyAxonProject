@@ -1,7 +1,7 @@
 package at.axon.configuration;
 
 import at.axon.aggregates.MyAggregate;
-import at.axon.events.EventHandlers;
+import at.axon.eventhandlers.EventHandlers;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
 import jakarta.enterprise.context.ApplicationScoped;
