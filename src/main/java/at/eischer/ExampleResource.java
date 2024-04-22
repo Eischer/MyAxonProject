@@ -1,11 +1,12 @@
 package at.eischer;
 
-import at.axon.aggregates.MyAggregate;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 
 @Path("/axon")
 public class ExampleResource {
@@ -18,9 +19,10 @@ public class ExampleResource {
     @POST
     @Produces(MediaType.TEXT_PLAIN)
     @Path("{id}")
-    public Response createAggregate(@PathParam("id") int id, @Context UriInfo uriInfo) {
+    public Response createAggregate(@PathParam("id") String id, @Context UriInfo uriInfo) {
+        logger.info(MessageFormat.format("Hello. ID is: {}", id));
         exampleService.createNewAggregate(id);
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(Integer.toString(id)).build()).build();
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(id).build()).build();
     }
 
     @GET

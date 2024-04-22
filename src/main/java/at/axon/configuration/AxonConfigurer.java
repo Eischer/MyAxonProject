@@ -1,9 +1,9 @@
 package at.axon.configuration;
 
 import at.axon.aggregates.MyAggregate;
+import at.axon.events.EventHandlers;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.security.AnyTypePermission;
-import io.axoniq.console.framework.AxoniqConsoleConfigurerModule;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 import org.axonframework.config.Configuration;
@@ -18,19 +18,10 @@ public class AxonConfigurer {
     @Produces
     public Configuration configure() {
         Configurer configurer = DefaultConfigurer.defaultConfiguration() //
+                .registerEventHandler(config -> new EventHandlers())
                 .configureAggregate(MyAggregate.class)
                 .configureSerializer(config -> commmandSerializerForAxonServer());
-        AxoniqConsoleConfigurerModule
-                .builder(
-                        "95d0cfd4-0",
-                        "f3094e246fd84ae6a9e4cde5d12fe2f7",
-                        "My Application Name"
-                )
-                .build()
-                .configureModule(configurer);
-
-        Configuration configuration = configurer.start();
-        return configuration;
+        return configurer.start();
     }
 
     private XStreamSerializer commmandSerializerForAxonServer() {

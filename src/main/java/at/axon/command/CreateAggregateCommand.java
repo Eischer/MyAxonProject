@@ -5,20 +5,13 @@ import org.axonframework.modelling.command.TargetAggregateIdentifier;
 public class CreateAggregateCommand {
 
     @TargetAggregateIdentifier
-    private final int id;
-    private final String command;
+    private final String id;
 
-    public CreateAggregateCommand(int id, String command) {
+    public CreateAggregateCommand(String id) {
         this.id = id;
-        this.command = command;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-
-    public String getCommand() {
-        return command;
-    }
-
 }
