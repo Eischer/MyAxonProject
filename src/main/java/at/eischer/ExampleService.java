@@ -12,8 +12,8 @@ public class ExampleService {
     @Inject
     Configuration configuration;
 
-    public void createNewAggregate(String id) {
-        configuration.commandGateway().sendAndWait(new CreateAggregateCommand(id));
+    public void createNewAggregate(String id, String name) {
+        configuration.commandGateway().sendAndWait(new CreateAggregateCommand(id, name));
     }
 
     public void editNewAggregate(String id, String name) {

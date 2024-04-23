@@ -33,7 +33,10 @@ public class MyAggregate {
     @CreationPolicy(AggregateCreationPolicy.CREATE_IF_MISSING)
     public void handle(CreateAggregateCommand createAggregateCommand) {
         logger.info("Enter CommandHandler. AggregateId is: " + aggregateId);
-        apply(new AggregateCreatedEvent(createAggregateCommand.getId()));
+        if (name != null) {
+            throw new RuntimeException("Aggregate already exists");
+        }
+        apply(new AggregateCreatedEvent(createAggregateCommand.getId(), createAggregateCommand.getName()));
     }
     
     @CommandHandler
@@ -45,6 +48,7 @@ public class MyAggregate {
     public void on (AggregateCreatedEvent event) {
         logger.info("Enter EventsourcingHandler. The event-id: " + event.getId());
         this.aggregateId = event.getId();
+        this.name = event.getName();
     }
     
     @EventSourcingHandler
