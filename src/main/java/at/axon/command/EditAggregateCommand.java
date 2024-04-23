@@ -1,24 +1,19 @@
 package at.axon.command;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+@AllArgsConstructor
+@ToString
 public class EditAggregateCommand {
     
     @TargetAggregateIdentifier
+    @Getter
     private String id;
     
+    @Getter
     private String nameToSet;
 
-    public EditAggregateCommand(String id, String nameToSet) {
-        this.id = id;
-        this.nameToSet = nameToSet;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getNameToSet() {
-        return nameToSet;
-    }
 }

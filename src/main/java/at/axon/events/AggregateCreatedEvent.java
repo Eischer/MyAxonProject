@@ -1,21 +1,16 @@
 package at.axon.events;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
+@AllArgsConstructor
+@ToString
 public class AggregateCreatedEvent {
 
+    @Getter
     private final String id;
     
+    @Getter
     private final String name;
-
-    public AggregateCreatedEvent(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-    
-    public String getName() {
-        return this.name;
-    }
 }

@@ -1,21 +1,16 @@
 package at.axon.events;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
+@AllArgsConstructor
+@ToString
 public class AggregateEditedEvent {
 
-    private String id;
+    @Getter
+    private final String id;
     
-    private String name;
-
-    public AggregateEditedEvent(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
+    @Getter
+    private final String name;
 }
