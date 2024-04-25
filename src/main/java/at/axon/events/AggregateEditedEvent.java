@@ -4,13 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
 
+@Getter
 @AllArgsConstructor
 @ToString
 public class AggregateEditedEvent {
 
-    @Getter
     private final String id;
     
-    @Getter
     private final String name;
 }

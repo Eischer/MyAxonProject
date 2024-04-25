@@ -5,15 +5,14 @@ import lombok.Getter;
 import lombok.ToString;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+@Getter
 @AllArgsConstructor
 @ToString
 public class EditAggregateCommand {
     
     @TargetAggregateIdentifier
-    @Getter
     private String id;
     
-    @Getter
     private String nameToSet;
 
 }
